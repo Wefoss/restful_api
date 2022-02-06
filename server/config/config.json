@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "first_restful",
+    "host": "localhost",
+    "dialect": "postgres",
+    "seederStorage": "json",
+    "migrationStorage":"json"
+  },
+  "test": {
+    
+  },
+  "production": {
+  }
+}
