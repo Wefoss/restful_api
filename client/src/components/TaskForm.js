@@ -1,19 +1,20 @@
 import React from 'react';
 import {Formik, Field, Form} from 'formik'
 
-const Taskform = () => {
+const Taskform = ({formIsClosed}) => {
 
-    const onSubmit = (formikBag, value) => {
+    const onSubmit = (values, formikBag) => {
         formikBag.resetForm()
+        formIsClosed(false)
     }
 
     return (
         <Formik initialValues={{
             body: '',
-            idDone: null
+            idDone: ''
         }} onSubmit={onSubmit}>
             <Form>
-                <Field name='body' plaseholder='Add some task'/>
+                <Field name='body' placeholder='Add some task'/>
                 <Field name='idDone' type='checkbox'/>
                  <button type="submit">Add task</button>
             </Form>

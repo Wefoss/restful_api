@@ -15,6 +15,7 @@
     "sequelize-cli": "^6.4.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "date-fns": "^2.28.0",
     "express": "^4.17.2",
     "pg": "^8.7.3",

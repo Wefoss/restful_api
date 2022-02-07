@@ -1,10 +1,13 @@
+import UserForm from "./components/UserForm";
+import Userlist from "./components/UserList";
 
-import './App.css';
+
 
 function App() {
   return (
     <section>
-      <p>Hello my resful</p>
+    <UserForm />
+    <Userlist />
     </section>
   );
 }
