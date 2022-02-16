@@ -6,4 +6,7 @@ const httpClient = axios.create({
 })
 
 export const  createUser = (data) => httpClient.post('/users', data)
-export const  getUsers = ({limit = 4, offset}) => httpClient.get(`/users?${qs.stringify({limit, offset})}`)
+export const  getUsers = ({limit, offset}) => httpClient.get(`/users?${qs.stringify({limit, offset})}`)
+
+export const  createTask = (data) => httpClient.post(`/tasks/${data.currentId}`, data.values)
+export const  getUserTask = () => httpClient.get('/tasks:userId')

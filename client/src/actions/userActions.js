@@ -32,3 +32,5 @@ export const getUserError = ({error}) => ({
     type: ACTION_TYPES.GET_USERS_ERROR,
     payload: {error}
 })
+
+

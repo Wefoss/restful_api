@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import {Formik, Field, Form} from 'formik'
 import * as userActions from '../actions/userActions'
@@ -14,6 +15,8 @@ const onSubmit = (values, formikBag) => {
 }
 
     return (
+        <>
+        <Link style={{"margin": '0 10px'}} to='/'>Back to home</Link>
         <Formik initialValues={{
             firstName: '',
             lastName: '',
@@ -30,6 +33,7 @@ const onSubmit = (values, formikBag) => {
             <button type='submit'>Add User</button>
             </Form>
         </Formik>
+        </>
     );
 }
 

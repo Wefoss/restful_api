@@ -2,11 +2,11 @@ const { Task, User } = require("../models");
 
 module.exports.createTask = async (req, res, next) => {
   try {
-    const {
-      params: { userId }, body} = req;
-    const user = await User.findByPk(userId);
+    const { params: { userId }, body} = req;
+            const user = await User.findByPk(userId);
     await user.createTask(body);
-    res.status(200).send(user);
+      console.log(body);
+    res.status(200).send({data: [body]});
   } catch (error) {
     next(error);
   }

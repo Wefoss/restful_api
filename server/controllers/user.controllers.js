@@ -1,4 +1,4 @@
-const {User} = require('../models')
+const {User, Task} = require('../models')
 
 module.exports.createUser = async (req, res, next) => {
   try {
@@ -18,6 +18,7 @@ module.exports.getAllUsers = async (req, res, next) => {
   try {
     const {query:{limit, offset}} = req
         const users = await User.findAll({
+          include: [{model: Task}],
           attributes: {
             exclude: ['password']
           },
