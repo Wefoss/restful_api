@@ -16,9 +16,18 @@ export function * createTaskSaga(action) {
   
   export function * getTasksSaga(action) {
     try {
-         const {data:{data: task}} = yield API.getUserTask()
-         yield put(taskActions.getUserTaskSuccess({task}))
+         const {data:{data: [tasks]}} = yield API.getAllTasks()
+         yield put(taskActions.getUserTaskSuccess({tasks}))
     } catch (error) {
       yield put(taskActions.getUserTaskError({error}))
+    }
+  }
+
+  export function * updateTaskSaga(action) {
+    try {
+         const {data:{data: task}} = yield API.updateTask(action.payload)
+         yield put(taskActions.updateTaskSuccess({task}))
+    } catch (error) {
+      yield put(taskActions.updateTaskError({error}))
     }
   }

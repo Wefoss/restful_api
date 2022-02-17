@@ -16,13 +16,13 @@ const Taskform = ({formIsClosed, currentId}) => {
     return (
         <Formik initialValues={{
             body: '',
-            isDone: ''
+            isDone: false
         }} onSubmit={onSubmit}>
             <Form>
                 <Field name='body' placeholder='Add some task'/>
                 <Field name='isDone' type='checkbox'/>
-                 <button style={{"border": "solid 2px green"}} type="submit">Plus one Task</button>
-            </Form>
+                 <button style={{"border": "solid 2px green"}} type="submit">Plus one Task</button>  
+                </Form>
         </Formik>
     );
 }

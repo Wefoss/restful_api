@@ -18,16 +18,33 @@ export const postUserTaskError = ({error}) => ({
 
 
 export const getUserTaskRequest = () => ({
-    type: ACTION_TYPES.GET_TASK_REQUEST,
+    type: ACTION_TYPES.GET_TASKS_REQUEST,
    
 })
 
-export const getUserTaskSuccess = ({task}) => ({
-    type: ACTION_TYPES.GET_TASK_SUCCESS,
-    payload: {task}
+export const getUserTaskSuccess = ({tasks}) => ({
+    type: ACTION_TYPES.GET_TASKS_SUCCESS,
+    payload: {tasks}
 })
 
 export const getUserTaskError = ({error}) => ({
-    type: ACTION_TYPES.GET_TASK_ERROR,
+    type: ACTION_TYPES.GET_TASKS_ERROR,
     payload: {error}
 })
+
+
+export const updateTaskRequest = ({values, taskId}) => ({
+    type: ACTION_TYPES.PATCH_TASK_REQUEST,
+    payload: {values, taskId}
+})
+
+export const updateTaskSuccess = ({task}) => ({
+    type: ACTION_TYPES.PATCH_TASK_SUCCESS,
+    payload: {task}
+})
+
+export const updateTaskError = ({error}) => ({
+    type: ACTION_TYPES.PATCH_TASK_ERROR,
+    payload: {error}
+})
+

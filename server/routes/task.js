@@ -7,6 +7,8 @@ taskRouter.get('/')
 taskRouter.get('/', TaskController.getAllTask)
 taskRouter.get('/:userId', TaskController.getTasksByUser)
 
+taskRouter.patch('/:taskId', TaskController.updateTask)
+
 taskRouter.delete('/:taskId', TaskController.deleteTask)
 
 taskRouter.post('/:userId', TaskController.createTask)

@@ -5,12 +5,13 @@ import * as userActions from '../actions/userActions'
 import UserItem from './UserItem'
 
 const Userlist = () => {
+  const { tasks } = useSelector(({ tasks }) => tasks)
   const { users, isFetching, error } = useSelector(({ users }) => users)
   const dispatch = useDispatch()
   const getUsersReq = ({ limit, offset } = {}) =>
     dispatch(userActions.getUserRequest({ limit, offset }))
   
-  const renderUsers = users.map(el => <UserItem user={el} key={el.id} />)
+  const renderUsers = users.map(el => <UserItem user={el}  tasks={tasks} key={el.id} />)
 
     useEffect(() => {
       if(!users.length) {

@@ -18,7 +18,7 @@ module.exports.getAllTask = async (req, res, next) => {
     if(!tasks) {
       throw new Error("Tasks no found")
     }
-    res.status(200).send(tasks);
+    res.status(200).send({data: [tasks]});
   } catch (error) {
     next(error);
   }
@@ -38,6 +38,20 @@ module.exports.getTasksByUser = async (req, res, next) => {
     //   throw new Error("Tasks no found")
     // }
     res.status(200).send(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.updateTask = async (req, res, next) => {
+  try {
+      const { params: {taskId}, body} = req;
+      const updateBody = {...body, isDone: !body.isDone}
+        const [rows,  [updatetask]] = await Task.update(updateBody, {
+        where: {id: taskId},
+        returning: true
+      })
+      res.status(200).send({data: updatetask});
   } catch (error) {
     next(error);
   }
