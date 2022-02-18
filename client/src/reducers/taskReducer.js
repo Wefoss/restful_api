@@ -4,8 +4,7 @@ const initialState = {
   tasks: [],
   isFetching: false,
   error: null,
-  
-}
+  }
 
 function taskReducer (state = initialState, action) {
   switch (action.type) {
@@ -18,8 +17,7 @@ function taskReducer (state = initialState, action) {
     }
     case ACTION_TYPES.POST_TASK_SUCCESS: {
       const {
-        payload: { task }
-      } = action
+        payload: { task }} = action
       return {
         ...state,
         isFetching: false,
@@ -89,6 +87,33 @@ function taskReducer (state = initialState, action) {
             error
           }
         }
+
+
+        case ACTION_TYPES.DELETE_TASK_REQUEST: {
+          return {
+            ...state,
+            isFetching: true,
+            error: null
+          }
+        }
+    
+        case ACTION_TYPES.DELETE_TASK_SUCCESS: {
+          const {payload: {task} } = action
+          return {
+            ...state,
+            isFetching: false,
+            tasks: [...state.tasks].filter(el => el.id !== task.id),
+            }
+        }
+    
+        case ACTION_TYPES.DELETE_TASK_ERROR: {
+            const {payload: { error }} = action
+            return {
+              ...state,
+              isFetching: false,
+              error
+            }
+          }
 
     default:
       return state

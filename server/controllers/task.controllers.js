@@ -3,10 +3,10 @@ const { Task, User } = require("../models");
 module.exports.createTask = async (req, res, next) => {
   try {
     const { params: { userId }, body} = req;
-            const user = await User.findByPk(userId);
-    await user.createTask(body);
-      console.log(body);
-    res.status(200).send({data: [body]});
+      const user = await User.findByPk(userId);
+      await user.createTask(body);
+      const task = await Task.findOne({where:{body: body.body}})
+      res.status(200).send({data: [task]});
   } catch (error) {
     next(error);
   }
@@ -62,7 +62,7 @@ module.exports.deleteTask = async (req, res, next) => {
       const {params: {taskId}} = req
       const task = await Task.findByPk(taskId)
       task.destroy()
-    res.status(200).send(task);
+    res.status(200).send({data: task});
   } catch (error) {
     next(error);
   }

@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga/effects'
 import ACTION_TYPES from '../actions/actionsType'
 import { createUserSaga,  getUsersSaga} from './userSagas'
-import { getTasksSaga, createTaskSaga, updateTaskSaga } from './taskSagas'
+import { getTasksSaga, createTaskSaga, updateTaskSaga, deleteTaskSaga } from './taskSagas'
 
 export function * rootSaga() {
     yield takeLatest(ACTION_TYPES.POST_USER_REQUEST, createUserSaga)
@@ -10,6 +10,7 @@ export function * rootSaga() {
     yield takeLatest(ACTION_TYPES.POST_TASK_REQUEST, createTaskSaga)
     yield takeLatest(ACTION_TYPES.GET_TASKS_REQUEST, getTasksSaga)
     yield takeLatest(ACTION_TYPES.PATCH_TASK_REQUEST, updateTaskSaga)
+    yield takeLatest(ACTION_TYPES.DELETE_TASK_REQUEST, deleteTaskSaga)
 }
 
 export default rootSaga

@@ -48,3 +48,19 @@ export const updateTaskError = ({error}) => ({
     payload: {error}
 })
 
+
+export const deleteTaskRequest = ({taskId}) => ({
+    type: ACTION_TYPES.DELETE_TASK_REQUEST,
+    payload: {taskId}
+})
+
+export const deleteTaskSuccess = ({task}) => ({
+    type: ACTION_TYPES.DELETE_TASK_SUCCESS,
+    payload: {task}
+})
+
+export const deleteTaskError = ({error}) => ({
+    type: ACTION_TYPES.DELETE_TASK_ERROR,
+    payload: {error}
+})
+

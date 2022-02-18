@@ -31,3 +31,12 @@ export function * createTaskSaga(action) {
       yield put(taskActions.updateTaskError({error}))
     }
   }
+
+  export function * deleteTaskSaga(action) {
+    try {
+         const {data:{data: task}} = yield API.deleteTask(action.payload)
+         yield put(taskActions.deleteTaskSuccess({task}))
+    } catch (error) {
+      yield put(taskActions.deleteTaskError({error}))
+    }
+  }
