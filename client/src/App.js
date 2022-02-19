@@ -13,7 +13,7 @@ function App() {
   const {tasks, isFetching, error} = useSelector(({tasks}) => tasks)
   const dispatch = useDispatch()
   const getAllTasks = () => dispatch(taskActions.getUserTaskRequest())
-  console.log(tasks);
+  
   useEffect(() => {
     if(!tasks.length) {
       getAllTasks()

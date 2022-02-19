@@ -1,10 +1,11 @@
 const {Router} = require('express')
 const TaskController = require('../controllers/task.controllers')
+const pagination = require('../middleware/pagination')
 
 const taskRouter = Router()
 
 taskRouter.get('/')
-taskRouter.get('/', TaskController.getAllTask)
+taskRouter.get('/', TaskController.getAllTask, pagination)
 taskRouter.get('/:userId', TaskController.getTasksByUser)
 
 taskRouter.patch('/:taskId', TaskController.updateTask)

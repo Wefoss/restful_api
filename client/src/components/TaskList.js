@@ -16,8 +16,7 @@ const deleteTask = (taskId) => {
   return (
         <li
         onDoubleClick={() => changeStatusTask(taskItem)}
-      
-          style={{
+            style={{
             borderLeft: taskItem.isDone ? "2px solid green" : "2px solid red",
             cursor: "pointer",
             margin: "5px",
@@ -25,7 +24,7 @@ const deleteTask = (taskId) => {
             justifyContent: "space-between",
             padding: "0 10px"
             }}>
-          <p  style={{"margin": "5px"}}>{taskItem.body}</p>
+          <p style={{"margin": "5px"}}>{taskItem.body}</p>
           <button onClick={() => deleteTask(taskItem.id)} style={{cursor: "pointer", backgroundColor: "transparent", borderRadius: "5px"}}>X</button>
         </li>
       )

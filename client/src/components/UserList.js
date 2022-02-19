@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import * as userActions from '../actions/userActions'
 
@@ -11,15 +11,14 @@ const Userlist = () => {
   const getUsersReq = ({ limit, offset } = {}) =>
     dispatch(userActions.getUserRequest({ limit, offset }))
   
-  const renderUsers = users.map(el => <UserItem user={el}  tasks={tasks} key={el.id} />)
+  const renderUsers = users.map(user => <UserItem user={user}  tasks={tasks} key={user.id} />)
 
     useEffect(() => {
       if(!users.length) {
         getUsersReq()
       }
-    
-  }, [])
-
+      }, [])
+ 
   return (
     <section>
       {isFetching && 'Loading'}

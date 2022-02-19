@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 import * as taskActions from "../actions/taskActions";
+import * as userActions from "../actions/userActions";
 
 const UserItem = ({ user }) => {
   const {tasks, isFetching, error } = useSelector(({ tasks }) => tasks);
@@ -11,6 +12,7 @@ const UserItem = ({ user }) => {
   const dispatch = useDispatch();
   const updateTaskAction = ({ values, taskId }) =>
     dispatch(taskActions.updateTaskRequest({ values, taskId }));
+  const deleteUserAction = ({userId}) => dispatch(userActions.deleteUserRequest({userId}))   
   const hideForm = () => {
     setIsOpenForm(isOpenForm === true ? false : true);
   };
@@ -24,14 +26,23 @@ const UserItem = ({ user }) => {
       body,
     };
     updateTaskAction({ values, taskId: id });
-    console.log(task);
-  };
-  const filterdTasks = tasks.filter((el) => el.userId === user.id);
-  
-  return (
+    };
+ 
+    const removeUser = (userId) => {
+      const conf = window.confirm('Are you sure wanna delete this task ?')
+      if(conf) {
+        deleteUserAction({userId})
+      } 
+      
+    }  
+    const filterdTasks = tasks.filter((el) => el.userId === user.id);
+   return (
     <>
       <li key={user.id} style={{ border: "2px solid gray", width: "300px" }}>
-        {user.email}
+         <div style={{display: "flex", justifyContent: "space-between"}}>
+            <p>{user.email}</p> 
+            <button onClick={() => removeUser(user.id)}>Remove</button>
+            </div>
         {isOpenForm && (
           <TaskForm
             currentId={user.id}
@@ -48,22 +59,22 @@ const UserItem = ({ user }) => {
             style={{
               display: "flex",
               alignItems: "center",
-              width: "200px",
+              width: "300px",
               justifyContent: "space-around",
             }}
           >
-            <h3>All Tasks </h3>
+            <h4>All User Tasks </h4>
             <p>Have {filterdTasks.length}</p>
-            <button
+        { filterdTasks.length > 0  &&   <button
               onClick={() =>
                 setToggleTasks(toggleTasks === false ? true : false)}>
               {toggleTasks ? "Open" : "Close"}
-            </button>
+            </button>}
           </div>
           <ul style={{ display: toggleTasks ? "none" : "block", padding: '0px' }}>
-            {tasks.map((task, i) => <TaskList
+            {filterdTasks.map(task => <TaskList
             taskItem={task}
-            key={i}
+            key={task.id}
             statusTask={statusTask}/>)}
           </ul>
         </div>

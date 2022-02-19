@@ -8,4 +8,6 @@ userRouter.get('/', userController.getAllUsers)
 
 userRouter.post('/', userController.createUser)
 
+userRouter.delete('/:userId', userController.deletelUser)
+
 module.exports = userRouter

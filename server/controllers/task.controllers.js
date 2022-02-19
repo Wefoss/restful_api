@@ -14,6 +14,7 @@ module.exports.createTask = async (req, res, next) => {
 
 module.exports.getAllTask = async (req, res, next) => {
   try {
+   
     const tasks = await Task.findAll();
     if(!tasks) {
       throw new Error("Tasks no found")

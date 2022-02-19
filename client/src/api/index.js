@@ -7,7 +7,7 @@ const httpClient = axios.create({
 
 export const  createUser = (data) => httpClient.post('/users', data)
 export const  getUsers = ({limit, offset}) => httpClient.get(`/users?${qs.stringify({limit, offset})}`)
-
+export const  deleteUser = (data) => httpClient.delete(`/users/${data.userId}`)
 
 export const  deleteTask = (data) => httpClient.delete(`/tasks/${data.taskId}`)
 export const  updateTask = (data) => httpClient.patch(`/tasks/${data.taskId}`, data.values)

@@ -34,3 +34,20 @@ export const getUserError = ({error}) => ({
 })
 
 
+export const deleteUserRequest = ({userId}) => ({
+    type: ACTION_TYPES.DELETE_USER_REQUEST,
+    payload: {userId}
+})
+
+export const deleteUserSuccess = ({user}) => ({
+    type: ACTION_TYPES.DELETE_USER_SUCCESS,
+    payload: {user}
+})
+
+export const deleteUserError = ({error}) => ({
+    type: ACTION_TYPES.DELETE_USER_ERROR,
+    payload: {error}
+})
+
+
+

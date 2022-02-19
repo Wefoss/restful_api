@@ -20,5 +20,11 @@ export function * getUsersSaga(action) {
   }
 }
 
-
-
+export function * deleteUserSaga(action) {
+  try {
+       const {data:{data: {user}}} = yield API.deleteUser(action.payload)
+       yield put(userActions.deleteUserSuccess({user}))
+  } catch (error) {
+    yield put(userActions.deleteUserError({error}))
+  }
+}
