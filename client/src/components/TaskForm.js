@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Field, Form } from "formik";
 import * as taskActions from "../actions/taskActions";
+import  {taskValidationSchema}  from "../helper/validationSchema";
 
 const Taskform = ({ formIsClosed, currentId }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Taskform = ({ formIsClosed, currentId }) => {
       initialValues={{
         body: "",
         isDone: false,
-      }}
+      }} validationSchema={taskValidationSchema}
       onSubmit={onSubmit}
     >
       <Form>

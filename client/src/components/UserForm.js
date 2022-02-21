@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Formik, Field, Form } from "formik";
 import * as userActions from "../actions/userActions";
+import  {userValidationSchema}  from "../helper/validationSchema";
 
 const UserForm = (props) => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const UserForm = (props) => {
           email: "",
           password: "",
           birthday: "",
-        }}
+        }} validationSchema={userValidationSchema}
         onSubmit={onSubmit}
       >
         <Form>

@@ -23,7 +23,9 @@ const taskReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(ACTION_TYPES.POST_TASK_REQUEST, requestHandler)
     .addCase(ACTION_TYPES.GET_TASKS_REQUEST, requestHandler)
-    .addCase(ACTION_TYPES.PATCH_TASK_REQUEST, requestHandler)
+    .addCase(ACTION_TYPES.PATCH_TASK_REQUEST, (state, action) => {
+      state.isFetching = false;
+    })
     .addCase(ACTION_TYPES.DELETE_TASK_REQUEST, requestHandler)
 
     .addCase(ACTION_TYPES.POST_TASK_SUCCESS, (state, action) => {
