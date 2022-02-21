@@ -6,20 +6,19 @@ import UserItem from './UserItem'
 
 const Userlist = () => {
   const { tasks } = useSelector(({ tasks }) => tasks)
-  const { users, isFetching, error } = useSelector(({ users }) => users)
+  const { users, isFetching, error } = useSelector((state) => state.users)
   const dispatch = useDispatch()
   const getUsersReq = ({ limit, offset } = {}) =>
     dispatch(userActions.getUserRequest({ limit, offset }))
   
-  const renderUsers = users.map(user => <UserItem user={user}  tasks={tasks} key={user.id} />)
+  const renderUsers = users.map(user => <UserItem user={user} errorUser={error}  tasks={tasks} key={user.id} />)
 
     useEffect(() => {
       if(!users.length) {
         getUsersReq()
       }
       }, [])
- 
-  return (
+    return (
     <section>
       {isFetching && 'Loading'}
       {error && error.message}

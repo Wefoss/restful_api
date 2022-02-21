@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, Link, NavLink, useLocation } from "react-router-dom";
+import { Route, Routes, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import UserForm from "./components/UserForm";
 import Userlist from "./components/UserList";
@@ -10,15 +10,17 @@ import { useEffect } from "react";
 
 function App() {
   const path = useLocation().pathname
-  const {tasks, isFetching, error} = useSelector(({tasks}) => tasks)
+  const {tasks} = useSelector(({tasks}) => tasks)
   const dispatch = useDispatch()
   const getAllTasks = () => dispatch(taskActions.getUserTaskRequest())
+  
+
   
   useEffect(() => {
     if(!tasks.length) {
       getAllTasks()
     }
-       }, []);
+       }, [getAllTasks, tasks]);
   return (
     <section>
       <h1>Users Task Pages</h1>

@@ -5,8 +5,8 @@ import TaskList from "./TaskList";
 import * as taskActions from "../actions/taskActions";
 import * as userActions from "../actions/userActions";
 
-const UserItem = ({ user }) => {
-  const {tasks, isFetching, error } = useSelector(({ tasks }) => tasks);
+const UserItem = ({ user, errorUser }) => {
+  const {tasks, isFetching, error} = useSelector((state) => state.tasks);
   const [toggleTasks, setToggleTasks] = useState(true);
   const [isOpenForm, setIsOpenForm] = useState(false);
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const UserItem = ({ user }) => {
     dispatch(taskActions.updateTaskRequest({ values, taskId }));
   const deleteUserAction = ({userId}) => dispatch(userActions.deleteUserRequest({userId}))   
   const hideForm = () => {
-    setIsOpenForm(isOpenForm === true ? false : true);
+    setIsOpenForm(!isOpenForm);
   };
   const closedForm = (value) => {
     setIsOpenForm(value);
@@ -29,15 +29,17 @@ const UserItem = ({ user }) => {
     };
  
     const removeUser = (userId) => {
-      const conf = window.confirm('Are you sure wanna delete this task ?')
+      const conf = window.confirm('Are you sure wanna delete this user ?')
       if(conf) {
         deleteUserAction({userId})
       } 
       
     }  
+   
     const filterdTasks = tasks.filter((el) => el.userId === user.id);
    return (
     <>
+    {errorUser && <p>Error</p>}
       <li key={user.id} style={{ border: "2px solid gray", width: "300px" }}>
          <div style={{display: "flex", justifyContent: "space-between"}}>
             <p>{user.email}</p> 
@@ -67,7 +69,7 @@ const UserItem = ({ user }) => {
             <p>Have {filterdTasks.length}</p>
         { filterdTasks.length > 0  &&   <button
               onClick={() =>
-                setToggleTasks(toggleTasks === false ? true : false)}>
+                setToggleTasks(!toggleTasks)}>
               {toggleTasks ? "Open" : "Close"}
             </button>}
           </div>

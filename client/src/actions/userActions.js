@@ -1,53 +1,14 @@
+import { createAction } from "@reduxjs/toolkit";
 import ACTION_TYPES from "./actionsType";
 
+export const postUserRequest = createAction(ACTION_TYPES.POST_USER_REQUEST);
+export const postUserSuccess = createAction(ACTION_TYPES.POST_USER_SUCCESS);
+export const postUserError = createAction(ACTION_TYPES.POST_USER_ERROR);
 
-export const postUserRequest = ({values}) => ({
-    type: ACTION_TYPES.POST_USER_REQUEST,
-    payload: {values}
-})
+export const getUserRequest = createAction(ACTION_TYPES.GET_USERS_REQUEST);
+export const getUserSuccess = createAction(ACTION_TYPES.GET_USERS_SUCCESS);
+export const getUserError = createAction(ACTION_TYPES.GET_USERS_SUCCESS);
 
-export const postUserSuccess = ({user}) => ({
-    type: ACTION_TYPES.POST_USER_SUCCESS,
-    payload: {user}
-})
-
-export const postUserError = ({error}) => ({
-    type: ACTION_TYPES.POST_USER_ERROR,
-    payload: {error}
-})
-
-
-
-export const getUserRequest = ({limit, offset}) => ({
-    type: ACTION_TYPES.GET_USERS_REQUEST,
-    payload: {limit, offset}
-})
-
-export const getUserSuccess = ({users}) => ({
-    type: ACTION_TYPES.GET_USERS_SUCCESS,
-    payload: {users}
-})
-
-export const getUserError = ({error}) => ({
-    type: ACTION_TYPES.GET_USERS_ERROR,
-    payload: {error}
-})
-
-
-export const deleteUserRequest = ({userId}) => ({
-    type: ACTION_TYPES.DELETE_USER_REQUEST,
-    payload: {userId}
-})
-
-export const deleteUserSuccess = ({user}) => ({
-    type: ACTION_TYPES.DELETE_USER_SUCCESS,
-    payload: {user}
-})
-
-export const deleteUserError = ({error}) => ({
-    type: ACTION_TYPES.DELETE_USER_ERROR,
-    payload: {error}
-})
-
-
-
+export const deleteUserRequest = createAction(ACTION_TYPES.DELETE_USER_REQUEST);
+export const deleteUserSuccess = createAction(ACTION_TYPES.DELETE_USER_SUCCESS);
+export const deleteUserError = createAction(ACTION_TYPES.DELETE_USER_ERROR);
