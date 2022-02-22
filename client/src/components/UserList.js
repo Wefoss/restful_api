@@ -5,7 +5,7 @@ import * as userActions from "../actions/userActions";
 import UserItem from "./UserItem";
 
 const Userlist = () => {
-  const { tasks } = useSelector(({ tasks }) => tasks);
+  const tasks = useSelector(({ tasks }) => tasks);
   const { users, isFetching, error } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const getUsersReq = ({ limit, offset } = {}) =>
@@ -19,9 +19,10 @@ const Userlist = () => {
     if (!users.length) {
       getUsersReq();
     }
-  }, []);
+  }, [getUsersReq]);
   return (
     <section>
+      {tasks.error && tasks.error.message}
       {isFetching && <span>Loading...</span> }
       {error && error.message}
       <h1>User List</h1>

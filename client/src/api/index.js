@@ -1,8 +1,9 @@
 import axios from "axios";
 import qs from "query-string";
-
+import { REQUEST_DATA } from "../constants";
+const {PORT, HOST, MAIN_URL} = REQUEST_DATA
 const httpClient = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: `${HOST}:${PORT}/${MAIN_URL}`,
 });
 
 export const createUser = (data) => httpClient.post("/users", data);

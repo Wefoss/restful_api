@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TaskForm from "./TaskForm";
 import TaskItem from "./TaskItem";
 import * as taskActions from "../actions/taskActions";
 
 const TaskList = ({ userId }) => {
-  const { tasks, isFetching, error } = useSelector(({ tasks }) => tasks);
+  const { tasks, isFetching } = useSelector(({ tasks }) => tasks);
   const [toggleTasks, setToggleTasks] = useState(true);
   const [isOpenForm, setIsOpenForm] = useState(false);
   const dispatch = useDispatch();
+  const getAllTasks = () => dispatch(taskActions.getUserTaskRequest())
   const updateTaskAction = ({ values, taskId }) =>
     dispatch(taskActions.updateTaskRequest({ values, taskId }));
-  const removeTask = ({ taskId }) =>
-    dispatch(taskActions.deleteTaskRequest({ taskId }));
+  
+
+    useEffect(() => {
+      if(!tasks.length) {
+        getAllTasks()
+      }
+         }, [getAllTasks, tasks]);
 
   const changeStatusTask = (task) => {
     statusTask(task);
@@ -21,7 +27,7 @@ const TaskList = ({ userId }) => {
   const statusTask = (task) => {
     const { isDone, body, id } = task;
     const values = {
-      isDone,
+      isDone: !isDone,
       body,
     };
     updateTaskAction({ values, taskId: id });
@@ -34,9 +40,6 @@ const TaskList = ({ userId }) => {
     setIsOpenForm(value);
   };
 
-  const deleteTask = (taskId) => {
-    removeTask({ taskId });
-  };
 
   const filterdTasks = tasks.filter((el) => el.userId === userId);
 
@@ -64,7 +67,6 @@ const TaskList = ({ userId }) => {
       >
         <h4 style={{ margin: "0px" }}>All User Tasks </h4>
         {isFetching && "Loading"}
-        {error && error.message}
         <p>Have {filterdTasks.length}</p>
         {filterdTasks.length > 0 && (
           <button onClick={() => setToggleTasks(!toggleTasks)}>

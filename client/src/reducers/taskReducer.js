@@ -42,7 +42,7 @@ const taskReducer = createReducer(initialState, (builder) => {
       const {payload: { task } } = action;
       state.isFetching = false;
       state.tasks = [...state.tasks].map((el) =>
-        el.id === task.id ? { ...el, isDone: task.isDone } : el
+        el.id === task.id ? { ...el, isDone: task.isDone, body: task.body } : el
       );
     })
     .addCase(ACTION_TYPES.DELETE_TASK_SUCCESS, (state, action) => {
